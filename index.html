@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Профи в Деле — Ремонт квартир в Калининграде</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#16a34a;--primary-dark:#15803d;--primary-light:#dcfce7;
+  --accent:#f59e0b;--dark:#111827;--gray:#6b7280;--light:#f9fafb;
+  --white:#fff;--radius:14px;--shadow:0 4px 20px rgba(22,163,74,.12);
+  --font-main:'Plus Jakarta Sans',sans-serif;--font-accent:'Sora',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-main);color:var(--dark);line-height:1.7;overflow-x:hidden;background:var(--white);padding-bottom:80px}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ═══ TOPBAR ══════════════════════════════════════════════ */
+.topbar{background:linear-gradient(90deg,#0f2d1a,#1a4a2a);color:rgba(255,255,255,.85);padding:10px 0;font-size:.83rem}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center}
+.topbar-item{display:inline-flex;align-items:center;gap:7px}
+.topbar-item svg{opacity:.7}
+
+/* ═══ NAV ════════════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(22,163,74,.1);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.1)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px}
+.nav-logo{display:flex;align-items:center;text-decoration:none}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{font-size:.88rem;font-weight:600;color:var(--gray);transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff;padding:10px 26px;border-radius:8px;font-size:.88rem;font-weight:700;transition:all .3s;border:none;cursor:pointer;white-space:nowrap}
+.nav-cta:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(22,163,74,.3)}
+
+/* ═══ HERO ═══════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+  padding:120px 0 80px;color:#fff;
+  background-color:#0d1f12;
+  background-image:url(hero_bg.jpg);background-size:cover;background-position:center;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(5,20,10,.88) 0%,rgba(10,30,15,.75) 60%,rgba(5,15,8,.65) 100%);
+}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-brand{display:flex;align-items:center;gap:0;margin-bottom:32px}
+.hero-brand-logo svg{filter:drop-shadow(0 4px 16px rgba(22,163,74,.5))}
+.hero-brand-text{margin-left:12px}
+.hero-brand-text .line1{font-family:var(--font-accent);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;color:#fff;line-height:1;letter-spacing:.05em;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hero-brand-text .line2{font-family:var(--font-accent);font-size:clamp(2.4rem,5vw,4rem);font-weight:900;color:#4ade80;line-height:1;letter-spacing:.05em;text-shadow:0 0 30px rgba(74,222,128,.5),0 2px 20px rgba(0,0,0,.4)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,.2);border:1px solid rgba(74,222,128,.35);padding:7px 18px;border-radius:50px;font-size:.78rem;font-weight:700;color:#86efac;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px}
+.hero-subtitle{font-size:1.1rem;color:rgba(255,255,255,.75);margin-bottom:36px;max-width:480px;line-height:1.7}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:#fff;padding:15px 34px;border-radius:9px;font-size:.98rem;font-weight:700;transition:all .3s;border:none;cursor:pointer}
+.btn-hero-primary:hover{background:#15803d;transform:translateY(-3px);box-shadow:0 14px 30px rgba(22,163,74,.4)}
+.btn-hero-outline{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);color:#fff;padding:15px 34px;border-radius:9px;font-size:.98rem;font-weight:600;border:2px solid rgba(255,255,255,.25);transition:all .3s;cursor:pointer;backdrop-filter:blur(4px)}
+.btn-hero-outline:hover{border-color:#4ade80;color:#4ade80}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.hero-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px 20px;text-align:center;backdrop-filter:blur(6px);transition:.3s}
+.hero-stat:hover{background:rgba(22,163,74,.12);border-color:rgba(74,222,128,.3)}
+.hero-stat-num{font-family:var(--font-accent);font-size:2rem;font-weight:900;color:#4ade80;margin-bottom:4px}
+.hero-stat-label{font-size:.8rem;color:rgba(255,255,255,.55)}
+
+/* ═══ SECTION COMMONS ════════════════════════════════════ */
+.section-heading{text-align:center;margin-bottom:64px}
+.section-tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:3px;margin-bottom:12px}
+.section-title{font-family:var(--font-accent);font-size:2.6rem;color:var(--dark);margin-bottom:16px}
+.section-desc{font-size:1.05rem;color:var(--gray);max-width:560px;margin:0 auto}
+
+/* ═══ SERVICES ════════════════════════════════════════════ */
+.services{padding:100px 0;background:var(--white)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.svc-card{background:var(--light);border-radius:var(--radius);border:1px solid transparent;transition:all .4s;overflow:hidden;display:flex;flex-direction:column}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.svc-card{position:relative}
+.svc-card:hover{transform:translateY(-8px);box-shadow:0 20px 52px rgba(22,163,74,.14);background:#fff;border-color:rgba(22,163,74,.12)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-photo{width:100%;height:200px;object-fit:cover;display:block;flex-shrink:0}
+.svc-body{padding:28px;display:flex;flex-direction:column;flex:1}
+.svc-icon{width:54px;height:54px;border-radius:13px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.svc-icon svg{width:24px;height:24px;color:var(--primary)}
+.svc-card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+.svc-card p{font-size:.88rem;color:var(--gray);line-height:1.75;flex:1}
+.svc-price{display:inline-block;margin-top:16px;font-size:.88rem;font-weight:800;color:var(--primary);background:var(--primary-light);padding:6px 16px;border-radius:7px}
+
+/* ═══ PORTFOLIO ══════════════════════════════════════════ */
+.portfolio{padding:100px 0;background:var(--light)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.portfolio-item{position:relative;border-radius:var(--radius);overflow:hidden;height:280px;cursor:pointer}
+.portfolio-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.portfolio-item:hover img{transform:scale(1.1)}
+.portfolio-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,25,15,.88) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px;opacity:0;transition:.3s}
+.portfolio-item:hover .portfolio-overlay{opacity:1}
+.portfolio-overlay h4{font-size:1rem;font-weight:700;color:#fff;margin-bottom:3px}
+.portfolio-overlay span{font-size:.82rem;color:rgba(255,255,255,.65)}
+
+/* ═══ PROCESS ════════════════════════════════════════════ */
+.process{padding:100px 0;background:var(--white)}
+.process .container{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.process-image img{border-radius:var(--radius);width:100%;height:480px;object-fit:cover;box-shadow:0 24px 56px rgba(0,0,0,.12)}
+.process-steps{display:flex;flex-direction:column;gap:20px}
+.p-step{display:flex;gap:18px;padding:22px;border-radius:var(--radius);border:1px solid rgba(22,163,74,.08);transition:.3s}
+.p-step:hover{background:var(--primary-light);border-color:rgba(22,163,74,.2)}
+.p-step-num{width:50px;height:50px;border-radius:12px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-family:var(--font-accent);font-size:1.15rem;font-weight:800;color:var(--primary);flex-shrink:0}
+.p-step h4{font-size:1rem;font-weight:700;margin-bottom:5px}
+.p-step p{font-size:.88rem;color:var(--gray)}
+
+/* ═══ CALCULATOR ══════════════════════════════════════════ */
+.calculator{padding:100px 0;background:linear-gradient(135deg,#0f4620 0%,var(--primary) 50%,#0f7a32 100%);color:#fff;text-align:center}
+.calculator h2{font-family:var(--font-accent);font-size:2.6rem;margin-bottom:14px}
+.calculator>p,.calculator .container>p{font-size:1.05rem;color:rgba(255,255,255,.7);margin-bottom:48px}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:900px;margin:0 auto}
+.calc-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:36px 22px;transition:.3s}
+.calc-card:hover{background:rgba(255,255,255,.16);transform:translateY(-6px)}
+.calc-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.calc-card .price{font-family:var(--font-accent);font-size:2.4rem;font-weight:800;color:#fbbf24;line-height:1;margin-bottom:4px}
+.calc-card .unit{font-size:.82rem;color:rgba(255,255,255,.55);margin-bottom:20px}
+.calc-features{list-style:none;text-align:left;font-size:.85rem;line-height:2.1}
+.calc-features li{color:rgba(255,255,255,.8);display:flex;align-items:center;gap:8px}
+.calc-features li svg{width:13px;height:13px;color:#fbbf24;flex-shrink:0}
+
+/* ═══ TESTIMONIALS ═══════════════════════════════════════ */
+.testimonials{padding:100px 0;background:var(--light)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.t-card{background:#fff;border-radius:var(--radius);padding:34px 26px;box-shadow:var(--shadow);transition:.3s}
+.t-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(22,163,74,.15)}
+.t-stars{display:flex;gap:3px;margin-bottom:14px}
+.t-stars svg{width:15px;height:15px;color:var(--accent)}
+.t-card blockquote{font-size:.93rem;color:var(--gray);line-height:1.75;margin-bottom:22px;font-style:italic}
+.t-author{display:flex;align-items:center;gap:13px}
+.t-avatar{width:46px;height:46px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:var(--primary);flex-shrink:0}
+.t-name{font-size:.92rem;font-weight:700}
+.t-role{font-size:.78rem;color:var(--gray)}
+
+/* ═══ CONTACT ════════════════════════════════════════════ */
+.contact{padding:100px 0;background:#fff}
+.contact .container{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-form{background:var(--light);border-radius:var(--radius);padding:44px;box-shadow:var(--shadow)}
+.contact-form h3{font-family:var(--font-accent);font-size:1.75rem;margin-bottom:8px}
+.contact-form>p{font-size:.88rem;color:var(--gray);margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:.83rem;font-weight:600;margin-bottom:7px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:13px 16px;border:2px solid #e5e7eb;border-radius:9px;font-family:var(--font-main);font-size:.93rem;transition:border-color .2s;outline:none;background:#fff}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--primary)}
+.form-group textarea{height:110px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-submit{width:100%;padding:15px;background:var(--primary);color:#fff;border:none;border-radius:9px;font-size:.98rem;font-weight:700;cursor:pointer;transition:.3s}
+.form-submit:hover{background:var(--primary-dark);transform:translateY(-2px)}
+.contact-info h3{font-family:var(--font-accent);font-size:1.75rem;margin-bottom:8px}
+.contact-info>p{font-size:.88rem;color:var(--gray);margin-bottom:28px}
+.cd{display:flex;gap:14px;margin-bottom:20px}
+.cd-icon{width:50px;height:50px;border-radius:var(--radius);background:var(--primary-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cd-icon svg{width:20px;height:20px;color:var(--primary)}
+.cd h4{font-size:.92rem;font-weight:700;margin-bottom:3px}
+.cd p{font-size:.88rem;color:var(--gray)}
+.contact-schedule{margin-top:36px;padding:24px;border-radius:var(--radius);background:var(--light);box-shadow:var(--shadow)}
+.contact-schedule h4{font-size:.95rem;font-weight:700;margin-bottom:14px}
+.contact-schedule table{width:100%;font-size:.88rem}
+.contact-schedule td{padding:5px 0;color:var(--gray)}
+.contact-schedule td:last-child{text-align:right;font-weight:600;color:var(--dark)}
+
+/* ═══ FOOTER ══════════════════════════════════════════════ */
+.footer{background:#0d1f12;color:rgba(255,255,255,.6);padding:60px 0 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.footer p{font-size:.88rem;line-height:1.75;margin-bottom:14px}
+.footer h4{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:14px}
+.footer ul{list-style:none}
+.footer ul li{margin-bottom:9px}
+.footer ul a{font-size:.88rem;color:rgba(255,255,255,.55);transition:color .2s}
+.footer ul a:hover{color:#4ade80}
+.footer-social{display:flex;gap:10px;margin-top:14px}
+.footer-social a{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;transition:.3s}
+.footer-social a:hover{background:var(--primary);transform:translateY(-3px)}
+.footer-social svg{width:15px;height:15px;color:rgba(255,255,255,.65)}
+.footer-bottom{padding-top:28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.83rem;flex-wrap:wrap;gap:8px}
+
+/* ═══ STICKY BUTTONS ══════════════════════════════════════ */
+.sticky-btns{
+  position:fixed;bottom:24px;right:24px;z-index:500;
+  display:flex;flex-direction:column;gap:12px;align-items:flex-end;
+}
+.sticky-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:50px;font-size:.95rem;font-weight:700;
+  cursor:pointer;border:none;transition:all .3s;
+  box-shadow:0 6px 24px rgba(0,0,0,.25);white-space:nowrap;
+}
+.sticky-call{background:#16a34a;color:#fff}
+.sticky-call:hover{background:#15803d;transform:translateY(-3px);box-shadow:0 10px 30px rgba(22,163,74,.45)}
+.sticky-order{background:#f59e0b;color:#fff}
+.sticky-order:hover{background:#d97706;transform:translateY(-3px);box-shadow:0 10px 30px rgba(245,158,11,.4)}
+.sticky-btn svg{width:18px;height:18px;flex-shrink:0}
+
+/* ═══ MODAL ЗАЯВКА ════════════════════════════════════════ */
+.modal-backdrop{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+}
+.modal-backdrop.open{display:flex}
+.modal-box{
+  background:#fff;border-radius:20px;padding:44px;width:100%;max-width:480px;
+  box-shadow:0 24px 64px rgba(0,0,0,.25);position:relative;
+  animation:modalIn .25s ease both;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(16px)}to{opacity:1;transform:scale(1)}}
+.modal-close{
+  position:absolute;top:16px;right:16px;background:var(--light);
+  border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.modal-close:hover{background:#e5e7eb}
+.modal-close svg{width:16px;height:16px;color:#6b7280}
+.modal-box h3{font-family:var(--font-accent);font-size:1.5rem;margin-bottom:6px}
+.modal-box>p{font-size:.88rem;color:var(--gray);margin-bottom:24px}
+
+/* ═══ RESPONSIVE ══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr}
+  .hero-stats{display:none}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .process .container{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr 1fr}
+  .contact .container{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hero{padding:100px 0 60px;min-height:auto}
+  .hero-brand-text .line1,.hero-brand-text .line2{font-size:2.6rem}
+  .services-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+  .section-title{font-size:2rem}
+  .calculator h2{font-size:2rem}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .sticky-btns{bottom:16px;right:16px}
+  .sticky-btn{padding:12px 18px;font-size:.88rem}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <span class="topbar-item">
+        <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+7(4012)55-11-22" style="font-weight:700;color:#fff">+7 (4012) 55-11-22</a>
+      </span>
+      <span class="topbar-item">
+        <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Пн–Вс 8:00 — 21:00</span>
+      </span>
+    </div>
+    <span>📍 г. Калининград — выезд в день обращения</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90" style="height:52px;display:block">
+  <polygon points="80,4 148,42 12,42" fill="none" stroke="#16a34a" stroke-width="5" stroke-linejoin="round"/>
+  <polygon points="80,14 138,46 138,86 22,86 22,46" fill="none" stroke="#2d6a3f" stroke-width="3.5" stroke-linejoin="round"/>
+  <rect x="66" y="60" width="28" height="26" rx="2" fill="#16a34a"/>
+  <line x1="80" y1="60" x2="80" y2="86" stroke="#fff" stroke-width="1.5"/>
+  <line x1="66" y1="73" x2="94" y2="73" stroke="#fff" stroke-width="1.5"/>
+</svg>
+      <span style="display:flex;flex-direction:column;line-height:1;margin-left:10px">
+  <span style="font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:900;color:#111827;letter-spacing:.03em">ПРОФИ</span>
+  <span style="font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:900;color:#16a34a;letter-spacing:.03em">В ДЕЛЕ</span>
+</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#portfolio">Работы</a></li>
+      <li><a href="#process">Этапы</a></li>
+      <li><a href="#pricing">Цены</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="nav-cta" onclick="openModal()">Оставить заявку</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-brand">
+        <div class="hero-brand-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90" style="height:80px;filter:drop-shadow(0 4px 24px rgba(74,222,128,.4))">
+            <polygon points="80,4 148,42 12,42" fill="none" stroke="#4ade80" stroke-width="5" stroke-linejoin="round"/>
+            <polygon points="80,14 138,46 138,86 22,86 22,46" fill="none" stroke="#86efac" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="66" y="60" width="28" height="26" rx="2" fill="#4ade80"/>
+            <line x1="80" y1="60" x2="80" y2="86" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+            <line x1="66" y1="73" x2="94" y2="73" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="hero-brand-text">
+          <div class="line1">ПРОФИ</div>
+          <div class="line2">В ДЕЛЕ</div>
+        </div>
+      </div>
+      <div class="hero-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+        Ремонт квартир в Калининграде
+      </div>
+      <p class="hero-subtitle">Профессиональный ремонт — сантехника, плитка, демонтаж, тёплый пол, поклейка обоев. Работаем на результат. Выезд в день обращения.</p>
+      <div class="hero-buttons">
+        <a href="tel:+7(4012)55-11-22" class="btn-hero-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Позвонить
+        </a>
+        <button class="btn-hero-outline" onclick="openModal()">
+          Оставить заявку
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Объектов выполнено</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">8 лет</div><div class="hero-stat-label">Опыт работы</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">4.9 ★</div><div class="hero-stat-label">Рейтинг на Авито</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">1 день</div><div class="hero-stat-label">Выезд на замер</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-heading">
+      <div class="section-tag">Услуги</div>
+      <h2 class="section-title">Всё необходимое для вашего ремонта</h2>
+      <p class="section-desc">Выполняем любые виды ремонтных работ: от мелкого ремонта до капитального</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- 1. Сантехник -->
+      <div class="svc-card">
+        <img src="svc1_photo1.jpg" alt="Сантехник" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12H2M12 12h10M2 12V7a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v5"/><circle cx="12" cy="7" r="2"/></svg></div>
+          <h3>Сантехник</h3>
+          <p>Замена труб, устранение протечек, установка смесителей, унитазов, ванн и душевых кабин. Работаю аккуратно, без лишних повреждений отделки. Выезд в день обращения.</p>
+          <span class="svc-price">от 599 ₽</span>
+        </div>
+      </div>
+
+      <!-- 2. Демонтаж -->
+      <div class="svc-card">
+        <img src="svc2_photo1.jpg" alt="Демонтаж" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.75l-2.25-2.25-.75.75c-.85 0-1.65-.33-2.25-.93L12.03 3.8a2.12 2.12 0 0 0-3 0L2.58 10.2l1.41 1.42"/></svg></div>
+          <h3>Демонтаж</h3>
+          <p>Снос стен и перегородок, демонтаж стяжки, плитки и старых покрытий, вывоз строительного мусора. Соблюдение норм безопасности. Опыт более 10 лет.</p>
+          <span class="svc-price">от 180 ₽/м²</span>
+        </div>
+      </div>
+
+      <!-- 3. Плитка -->
+      <div class="svc-card">
+        <img src="svc3_photo1.jpg" alt="Плиточные работы" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+          <h3>Плиточные работы</h3>
+          <p>Укладка кафеля, керамогранита, мозаики: ванная, кухня, прихожая, пол. Ровные швы, долговечный результат. Простая, диагональная и фигурная укладка.</p>
+          <span class="svc-price">от 1 000 ₽/м²</span>
+        </div>
+      </div>
+
+      <!-- 4. Тёплый пол -->
+      <div class="svc-card">
+        <img src="svc4_photo1.jpg" alt="Тёплый пол" class="svc-photo">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+          <h3>Тёплый пол, отопление, водоснабжение</h3>
+          <p>Монтаж водяного и электрического тёплого пола, систем отопления. Замена радиаторов, котлов, подключение бойлеров. Гарантия на все виды работ.</p>
+          <span class="svc-price">от 450 ₽/м²</span>
+        </div>
+      </div>
+
+      <!-- 5. Поклейка обоев -->
+      <div class="svc-card">
+        <img src="svc3_photo1.jpg" alt="Поклейка обоев" class="svc-photo" style="object-position:right center">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
+          <h3>Поклейка обоев</h3>
+          <p>Поклейка любых видов обоев: флизелиновых, виниловых, стеклохолста, фотообоев. Подготовка стен, выравнивание, точная подгонка узора. Аккуратно и быстро.</p>
+          <span class="svc-price">от 250 ₽/м²</span>
+        </div>
+      </div>
+
+      <!-- 6. Домашний мастер -->
+      <div class="svc-card">
+        <img src="svc1_photo1.jpg" alt="Домашний мастер" class="svc-photo" style="object-position:left 30%">
+        <div class="svc-body">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <h3>Домашний мастер</h3>
+          <p>Сборка мебели, навеска полок и карнизов, установка дверей и замков, мелкий ремонт электрики, устранение любых бытовых неисправностей. Один мастер — все задачи.</p>
+          <span class="svc-price">от 600 ₽/час</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-heading">
+      <div class="section-tag">Портфолио</div>
+      <h2 class="section-title">Примеры наших работ</h2>
+      <p class="section-desc">Реальные объекты, выполненные нашей командой</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="svc1_photo1.jpg" alt="Сантехнические работы">
+        <div class="portfolio-overlay"><h4>Сантехнические работы</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc2_photo1.jpg" alt="Демонтаж перегородок">
+        <div class="portfolio-overlay"><h4>Демонтаж перегородок</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc3_photo1.jpg" alt="Плиточные работы">
+        <div class="portfolio-overlay"><h4>Укладка плитки</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc4_photo1.jpg" alt="Тёплый пол">
+        <div class="portfolio-overlay"><h4>Монтаж тёплого пола</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc3_photo1.jpg" alt="Поклейка обоев" style="object-position:right">
+        <div class="portfolio-overlay"><h4>Поклейка обоев</h4><span>Калининград</span></div>
+      </div>
+      <div class="portfolio-item">
+        <img src="svc1_photo1.jpg" alt="Домашний мастер" style="object-position:left 30%">
+        <div class="portfolio-overlay"><h4>Мелкий ремонт</h4><span>Калининград</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="container">
+    <div>
+      <div class="section-tag">Как мы работаем</div>
+      <h2 class="section-title" style="text-align:left">Понятный процесс без лишних слов</h2>
+      <div class="process-steps">
+        <div class="p-step">
+          <div class="p-step-num">01</div>
+          <div><h4>Звонок и выезд</h4><p>Свяжитесь с нами — приедем в тот же день, замерим и обсудим задачу бесплатно</p></div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">02</div>
+          <div><h4>Цена и договор</h4><p>Фиксируем стоимость и сроки в договоре. Без скрытых доплат</p></div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">03</div>
+          <div><h4>Выполняем работу</h4><p>Работаем аккуратно, присылаем фотоотчёт в WhatsApp по запросу</p></div>
+        </div>
+        <div class="p-step">
+          <div class="p-step-num">04</div>
+          <div><h4>Приёмка и гарантия</h4><p>Сдаём работу, убираем за собой. Даём гарантию на результат</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="process-image">
+      <img src="svc3_photo1.jpg" alt="Процесс ремонта">
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR / PRICING -->
+<section class="calculator" id="pricing">
+  <div class="container">
+    <h2>Стоимость работ</h2>
+    <p>Честное ценообразование — никаких сюрпризов после договора</p>
+    <div class="calc-grid">
+      <div class="calc-card">
+        <h3>Сантехника</h3>
+        <div class="price">599 ₽</div>
+        <div class="unit">от / работа</div>
+        <ul class="calc-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Замена смесителя</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Устранение протечек</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Установка унитаза / ванны</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Замена труб</li>
+        </ul>
+      </div>
+      <div class="calc-card" style="border-color:#fbbf24;transform:translateY(-8px)">
+        <h3>Плитка / Полы</h3>
+        <div class="price">1 000 ₽</div>
+        <div class="unit">от / м²</div>
+        <ul class="calc-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Кафель, керамогранит</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Мозаика, фигурная укладка</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Тёплый пол от 450 ₽/м²</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Гидроизоляция в подарок</li>
+        </ul>
+      </div>
+      <div class="calc-card">
+        <h3>Отделка / Обои</h3>
+        <div class="price">250 ₽</div>
+        <div class="unit">от / м²</div>
+        <ul class="calc-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Поклейка обоев</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Покраска стен / потолков</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Шпаклёвка, штукатурка</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Домашний мастер: 600 ₽/ч</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-heading">
+      <div class="section-tag">Отзывы</div>
+      <h2 class="section-title">Что говорят клиенты</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="t-card">
+        <div class="t-stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <blockquote>«Заменили трубы по всей квартире за 2 дня. Работали аккуратно, всё убрали за собой. Цена оказалась ниже, чем в других местах!»</blockquote>
+        <div class="t-author"><div class="t-avatar">АС</div><div><div class="t-name">Андрей Смирнов</div><div class="t-role">Сантехника, Калининград</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <blockquote>«Положили плитку в ванной и на кухне. Швы идеально ровные, узор совпал идеально. Очень довольна результатом, рекомендую!»</blockquote>
+        <div class="t-author"><div class="t-avatar">ЕК</div><div><div class="t-name">Елена Кузнецова</div><div class="t-role">Плиточные работы, ванная</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <blockquote>«Обклеили все комнаты обоями — и мастер сам предложил купить на 2 рулона меньше, потому что правильно рассчитал. Честный и профессиональный.»</blockquote>
+        <div class="t-author"><div class="t-avatar">МП</div><div><div class="t-name">Марина Попова</div><div class="t-role">Поклейка обоев, 3-комн. кв.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-form">
+      <h3>Оставить заявку</h3>
+      <p>Заполните форму — перезвоним в течение 15 минут</p>
+      <form id="mainContactForm">
+        <div class="form-row">
+          <div class="form-group"><label>Ваше имя</label><input type="text" name="name" placeholder="Иван Иванов" required></div>
+          <div class="form-group"><label>Телефон</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Тип работ</label>
+            <select name="service">
+              <option value="">Выберите услугу</option>
+              <option>Сантехник</option>
+              <option>Демонтаж</option>
+              <option>Плиточные работы</option>
+              <option>Тёплый пол / отопление</option>
+              <option>Поклейка обоев</option>
+              <option>Домашний мастер</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Удобное время</label><input type="text" name="time" placeholder="Например: завтра после 15:00"></div>
+        </div>
+        <div class="form-group"><label>Комментарий</label><textarea name="message" placeholder="Опишите задачу..."></textarea></div>
+        <button type="submit" class="form-submit">Отправить заявку →</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h3>Контакты</h3>
+      <p>Работаем по всему Калининграду и области</p>
+      <div class="cd">
+        <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><h4>Телефон</h4><p><a href="tel:+7(4012)55-11-22" style="color:var(--primary);font-weight:700">+7 (4012) 55-11-22</a></p></div>
+      </div>
+      <div class="cd">
+        <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><h4>Адрес</h4><p>г. Калининград — выезд по всему городу</p></div>
+      </div>
+      <div class="cd">
+        <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><h4>Время работы</h4><p>Пн–Вс: 8:00 — 21:00</p></div>
+      </div>
+      <div class="contact-schedule">
+        <h4>🕐 Режим работы</h4>
+        <table>
+          <tr><td>Понедельник — Пятница</td><td>08:00 — 21:00</td></tr>
+          <tr><td>Суббота — Воскресенье</td><td>09:00 — 20:00</td></tr>
+          <tr><td>Выезд на замер</td><td>Бесплатно</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90" style="height:38px">
+            <polygon points="80,4 148,42 12,42" fill="none" stroke="#4ade80" stroke-width="5" stroke-linejoin="round"/>
+            <polygon points="80,14 138,46 138,86 22,86 22,46" fill="none" stroke="#86efac" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="66" y="60" width="28" height="26" rx="2" fill="#4ade80"/>
+          </svg>
+          <span style="font-family:var(--font-accent);font-size:1.2rem;font-weight:900;color:#fff;margin-left:10px">ПРОФИ <span style="color:#4ade80">В ДЕЛЕ</span></span>
+        </div>
+        <p>Ремонт квартир и бытовые услуги в Калининграде. Работаем честно, делаем качественно.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.994l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.565z"/></svg></a>
+          <a href="#" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a href="#" aria-label="ВКонтакте" title="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.701 18.771H13.19c.431 0 .639-.219.639-.63v-4.157c.149-.118.28-.24.396-.362l3.22 4.732c.155.232.348.417.717.417h1.61c.529 0 .746-.219.5-.701l-3.44-5.017 3.177-3.884c.356-.427.133-.711-.358-.711h-1.517c-.436 0-.64.219-.851.5l-3.055 3.84V8.63c0-.434-.2-.63-.639-.63H13.19c-.426 0-.647.217-.647.63v10.511c0 .41.218.63.647.63zm-4.12-7.23c.006-.38-.225-.583-.615-.583h-1.6c-.434 0-.68.225-.604.606l.025.077c.288 1.207.955 2.83 2.17 4.197C8.08 17.135 9.834 18.8 12.54 18.8c1.519 0 1.654-.18 1.654-.58v-1.352c0-.375-.153-.554-.518-.643-.762-.188-1.352-.545-1.836-1.076-.625-.694-1.197-1.695-1.557-3.169l-.037-.131-.062-.257-.603-.051zm.058-3.309h-.004z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Услуги</h4><ul>
+        <li><a href="#services">Сантехник</a></li>
+        <li><a href="#services">Демонтаж</a></li>
+        <li><a href="#services">Плиточные работы</a></li>
+        <li><a href="#services">Тёплый пол</a></li>
+        <li><a href="#services">Поклейка обоев</a></li>
+        <li><a href="#services">Домашний мастер</a></li>
+      </ul></div>
+      <div><h4>Компания</h4><ul>
+        <li><a href="#portfolio">Наши работы</a></li>
+        <li><a href="#process">Как мы работаем</a></li>
+        <li><a href="#pricing">Цены</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul></div>
+      <div><h4>Контакты</h4><ul>
+        <li><a href="tel:+7(4012)55-11-22">+7 (4012) 55-11-22</a></li>
+        <li><a href="#">г. Калининград</a></li>
+        <li><a href="#">Пн–Вс 8:00–21:00</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Профи в Деле. Ремонт в Калининграде.</span>
+      <span>Выезд в день обращения. Без выходных.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY BUTTONS -->
+<div class="sticky-btns">
+  <a href="tel:+7(4012)55-11-22" class="sticky-btn sticky-call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Позвонить
+  </a>
+  <button class="sticky-btn sticky-order" onclick="openModal()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Заявка
+  </button>
+</div>
+
+<!-- MODAL ЗАЯВКА -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3>Оставить заявку</h3>
+    <p>Перезвоним в течение 15 минут и обсудим задачу</p>
+    <form id="modalForm">
+      <div class="form-group"><label>Ваше имя</label><input type="text" name="name" placeholder="Иван Иванов" required></div>
+      <div class="form-group"><label>Телефон</label><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Что нужно сделать?</label>
+        <select name="service">
+          <option value="">Выберите услугу</option>
+          <option>Сантехник</option>
+          <option>Демонтаж</option>
+          <option>Плиточные работы</option>
+          <option>Тёплый пол / отопление</option>
+          <option>Поклейка обоев</option>
+          <option>Домашний мастер</option>
+          <option>Другое</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Комментарий (необязательно)</label><textarea name="message" placeholder="Опишите задачу..." style="height:90px"></textarea></div>
+      <button type="submit" class="form-submit">Отправить заявку</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// ── Липкий nav ───────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Модал ────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modalBackdrop').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Отправка в Telegram ──────────────────────────────────
+const TG_TOKEN   = '8434584674:AAGvxeQulQDyaESBQeu7rF5siC6HHs2McrE';
+const TG_CHAT_ID = '549333404';
+
+async function sendToTelegram(formEl) {
+  const fd = new FormData(formEl);
+  const d  = Object.fromEntries(fd.entries());
+  const text = [
+    '🔨 Новая заявка — Профи в Деле (Калининград)',
+    '',
+    `👤 Имя: ${d.name || '—'}`,
+    `📱 Телефон: ${d.phone || '—'}`,
+    `🛠 Услуга: ${d.service || '—'}`,
+    `💬 Комментарий: ${d.message || 'не указан'}`,
+    '',
+    '📌 Сайт: Профи в Деле'
+  ].join('\n');
+
+  const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: 'HTML' })
+  });
+  return res.ok;
+}
+
+document.querySelectorAll('#mainContactForm, #modalForm').forEach(form => {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type=submit]');
+    const orig = btn.textContent;
+    btn.textContent = '⏳ Отправка...';
+    btn.disabled = true;
+    try {
+      const ok = await sendToTelegram(form);
+      if (ok) {
+        btn.textContent = '✅ Отправлено!';
+        form.reset();
+        setTimeout(() => { closeModal(); btn.textContent = orig; btn.disabled = false; }, 1800);
+      } else { throw new Error(); }
+    } catch {
+      btn.textContent = orig;
+      btn.disabled = false;
+      alert('Ошибка соединения. Пожалуйста, позвоните напрямую: +7 (4012) 55-11-22');
+    }
+  });
+});
+</script>
+</body>
+</html>
